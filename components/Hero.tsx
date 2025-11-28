@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 export const Hero: React.FC = () => {
+  const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setOffset(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <section id="ve-chung-toi" className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
+      {/* Background Image with Parallax */}
+      <div 
+        className="absolute inset-0 z-0 will-change-transform"
+        style={{ transform: `translateY(${offset * 0.5}px)` }}
+      >
         <img
           src="https://picsum.photos/id/28/1920/1200"
           alt="Forest nature healing"

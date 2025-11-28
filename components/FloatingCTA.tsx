@@ -4,7 +4,7 @@ import { Phone } from 'lucide-react';
 export const FloatingCTA: React.FC = () => {
   return (
     <a
-      href="tel:0931796363"
+      href="tel:0869566982"
       className="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-emerald-800 text-white px-5 py-3 rounded-full shadow-2xl hover:bg-emerald-700 transition-all duration-300 group border-2 border-gold-500/50"
     >
       <div className="relative">

@@ -49,7 +49,7 @@ export const Header: React.FC = () => {
             </a>
           ))}
           <a
-            href="tel:0931796363"
+            href="tel:0869566982"
             className={`border px-6 py-2 rounded-full font-medium transition-all ${
               isScrolled
                 ? 'border-emerald-800 text-emerald-800 hover:bg-emerald-800 hover:text-white'

@@ -30,7 +30,7 @@ export const Consultation: React.FC = () => {
                   <div>
                     <h4 className="font-serif text-xl font-bold text-emerald-900">Hotline Tư Vấn</h4>
                     <p className="text-slate-500 mb-1 font-light">Hỗ trợ đặt lịch & tư vấn nhanh</p>
-                    <a href="tel:0931796363" className="text-2xl font-serif font-bold text-gold-600 hover:text-gold-500 transition-colors">093 179 6363</a>
+                    <a href="tel:0869566982" className="text-2xl font-serif font-bold text-gold-600 hover:text-gold-500 transition-colors">0869 566 982</a>
                   </div>
                 </div>
 
@@ -68,7 +68,7 @@ export const Consultation: React.FC = () => {
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-bold text-emerald-800 uppercase tracking-widest">Số điện thoại</label>
-                    <input type="tel" className="w-full px-4 py-3 rounded-xl border border-emerald-200 focus:border-gold-500 focus:ring-1 focus:ring-gold-500 outline-none bg-white transition-all shadow-sm placeholder-emerald-900/30" placeholder="093 179 6363" />
+                    <input type="tel" className="w-full px-4 py-3 rounded-xl border border-emerald-200 focus:border-gold-500 focus:ring-1 focus:ring-gold-500 outline-none bg-white transition-all shadow-sm placeholder-emerald-900/30" placeholder="0869 566 982" />
                   </div>
                 </div>
 

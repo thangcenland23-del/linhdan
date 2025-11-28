@@ -43,11 +43,11 @@ export const Contact: React.FC = () => {
               </li>
               <li className="flex gap-3 items-center">
                 <Phone className="w-5 h-5 text-emerald-400 shrink-0" />
-                <a href="tel:0931796363" className="text-emerald-100/80 hover:text-white font-bold text-lg">0869 566 982</a>
+                <a href="tel:0869566982" className="text-emerald-100/80 hover:text-white font-bold text-lg">0869 566 982</a>
               </li>
               <li className="flex gap-3 items-center">
                 <Mail className="w-5 h-5 text-emerald-400 shrink-0" />
-                <span className="text-emerald-100/80"> mentorlinhdan@gmai.com</span>
+                <span className="text-emerald-100/80"> mentorlinhdan@gmail.com</span>
               </li>
             </ul>
           </div>

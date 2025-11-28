@@ -1,13 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Heart, Sun, Feather } from 'lucide-react';
 
 export const Philosophy: React.FC = () => {
+  const [offset, setOffset] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        // Calculate offset based on section position relative to viewport
+        // Only animate when near viewport to save resources
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+           // Move image down slightly as we scroll down (parallax)
+           const speed = 0.1;
+           setOffset((window.innerHeight - rect.top) * speed);
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial calculation
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <section id="triet-ly" className="py-24 bg-white overflow-hidden">
+    <section id="triet-ly" className="py-24 bg-white overflow-hidden" ref={sectionRef}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Image Side */}
-          <div className="relative">
+          {/* Image Side with Parallax */}
+          <div 
+            className="relative will-change-transform transition-transform duration-75 ease-out"
+            style={{ transform: `translateY(${offset}px)` }}
+          >
             <div className="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-gold-500/30 rounded-tl-3xl"></div>
             <div className="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-gold-500/30 rounded-br-3xl"></div>
             <img
@@ -18,7 +43,7 @@ export const Philosophy: React.FC = () => {
           </div>
 
           {/* Text Side */}
-          <div className="space-y-8">
+          <div className="space-y-8 relative z-10 bg-white/80 backdrop-blur-sm lg:bg-transparent lg:backdrop-blur-none p-6 lg:p-0 rounded-2xl">
             <div>
               <h2 className="text-emerald-800 font-serif text-5xl font-bold mb-4">
                 Cốt Lõi Của Hạnh Phúc
