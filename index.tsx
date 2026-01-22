@@ -1,15 +1,477 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chữa Lành – Bình An Nội Tâm</title>
+  <meta name="description" content="Hành trình chữa lành, bình an nội tâm và hạnh phúc gia đình. Lộ trình rõ ràng, thực hành đơn giản, đồng hành tận tâm." />
 
-const rootElement = document.getElementById('root');
-if (!rootElement) {
-  throw new Error("Could not find root element to mount to");
-}
+  <!-- Open Graph -->
+  <meta property="og:title" content="Chữa Lành – Bình An Nội Tâm" />
+  <meta property="og:description" content="Chữa lành – bình an nội tâm – hạnh phúc gia đình. Lộ trình thực hành, đồng hành và chuyển hóa." />
+  <meta property="og:type" content="website" />
 
-const root = ReactDOM.createRoot(rootElement);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            emerald: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              800: '#065f46',
+              900: '#064e3b',
+              950: '#022c22',
+            },
+            gold: { 400:'#fbbf24', 500:'#f59e0b', 600:'#d97706' }
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'serif'],
+            sans: ['"Montserrat"', 'sans-serif'],
+          },
+          boxShadow: {
+            soft: '0 12px 40px rgba(2, 44, 34, 0.10)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    .noise {
+      background-image:
+        radial-gradient(1200px circle at 10% 10%, rgba(251,191,36,.18), transparent 55%),
+        radial-gradient(900px circle at 90% 20%, rgba(16,185,129,.14), transparent 55%),
+        radial-gradient(900px circle at 30% 90%, rgba(59,130,246,.10), transparent 60%);
+    }
+    .glass {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .reveal { opacity: 0; transform: translateY(16px); transition: all .6s ease; }
+    .reveal.show { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 antialiased font-sans">
+  <!-- Top notice -->
+  <div class="bg-emerald-950 text-emerald-50">
+    <div class="mx-auto max-w-6xl px-4 py-2 text-xs md:text-sm flex items-center justify-between gap-3">
+      <p class="opacity-90">Chữa lành không phải “một ngày là xong”. Đây là hành trình, và bạn không cần đi một mình.</p>
+      <a href="#contact" class="hidden sm:inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 hover:bg-white/15 transition">
+        Nhận tư vấn lộ trình
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-white/70 glass border-b border-slate-200">
+    <div class="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
+      <a href="#home" class="flex items-center gap-3">
+        <div class="h-10 w-10 rounded-2xl bg-emerald-950 text-emerald-50 grid place-items-center shadow-soft">
+          <span class="font-serif text-lg">B</span>
+        </div>
+        <div class="leading-tight">
+          <div class="font-serif text-lg font-bold text-slate-900">Bình An Nội Tâm</div>
+          <div class="text-xs text-slate-600">Chữa lành • Gia đình • Nội lực</div>
+        </div>
+      </a>
+
+      <button id="menuBtn" class="md:hidden rounded-xl border border-slate-200 px-3 py-2 text-sm hover:bg-slate-50">
+        Menu
+      </button>
+
+      <nav id="menu" class="hidden md:flex items-center gap-6 text-sm">
+        <a class="hover:text-emerald-900" href="#path">Lộ trình</a>
+        <a class="hover:text-emerald-900" href="#programs">Chương trình</a>
+        <a class="hover:text-emerald-900" href="#proof">Kết quả</a>
+        <a class="hover:text-emerald-900" href="#faq">FAQ</a>
+        <a class="inline-flex items-center justify-center rounded-full bg-emerald-950 px-4 py-2 text-emerald-50 hover:bg-emerald-900 transition" href="#contact">
+          Đặt lịch
+        </a>
+      </nav>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="md:hidden hidden border-t border-slate-200 bg-white">
+      <div class="mx-auto max-w-6xl px-4 py-3 flex flex-col gap-3 text-sm">
+        <a class="hover:text-emerald-900" href="#path">Lộ trình</a>
+        <a class="hover:text-emerald-900" href="#programs">Chương trình</a>
+        <a class="hover:text-emerald-900" href="#proof">Kết quả</a>
+        <a class="hover:text-emerald-900" href="#faq">FAQ</a>
+        <a class="inline-flex items-center justify-center rounded-xl bg-emerald-950 px-4 py-2 text-emerald-50 hover:bg-emerald-900 transition" href="#contact">
+          Đặt lịch
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="noise">
+    <div class="mx-auto max-w-6xl px-4 pt-14 pb-14 md:pt-20 md:pb-20">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div class="reveal">
+          <p class="inline-flex items-center gap-2 rounded-full bg-white/70 glass border border-white/60 px-4 py-2 text-xs text-slate-700 shadow-soft">
+            <span class="h-2 w-2 rounded-full bg-gold-500"></span>
+            Lộ trình chữa lành thực hành – không “mơ hồ”
+          </p>
+
+          <h1 class="mt-5 font-serif text-4xl md:text-6xl font-bold tracking-tight text-slate-900">
+            Chữa Lành để <span class="text-emerald-950">Bình An</span> bên trong,
+            và ấm lại <span class="text-emerald-950">hạnh phúc</span> gia đình.
+          </h1>
+
+          <p class="mt-5 text-base md:text-lg text-slate-700 leading-relaxed">
+            Nếu bạn đang mệt mỏi, quá tải cảm xúc, hay thấy mình “đang sống mà không thật sự sống” —
+            bạn không sai. Bạn chỉ cần một cách đi lại từ gốc: nhận diện – buông bám – xây nội lực.
+          </p>
+
+          <div class="mt-7 flex flex-col sm:flex-row gap-3">
+            <a href="#contact" class="inline-flex items-center justify-center rounded-2xl bg-emerald-950 px-6 py-3 text-emerald-50 hover:bg-emerald-900 transition shadow-soft">
+              Nhận tư vấn lộ trình (miễn phí)
+            </a>
+            <a href="#path" class="inline-flex items-center justify-center rounded-2xl bg-white/70 glass border border-white/70 px-6 py-3 text-slate-900 hover:bg-white transition shadow-soft">
+              Xem lộ trình 4 bước
+            </a>
+          </div>
+
+          <div class="mt-8 grid grid-cols-3 gap-3 max-w-lg">
+            <div class="rounded-2xl bg-white/70 glass border border-white/70 p-4 shadow-soft">
+              <div class="text-xl font-semibold text-slate-900">7–21</div>
+              <div class="text-xs text-slate-600">ngày tạo nhịp thói quen</div>
+            </div>
+            <div class="rounded-2xl bg-white/70 glass border border-white/70 p-4 shadow-soft">
+              <div class="text-xl font-semibold text-slate-900">1:1</div>
+              <div class="text-xs text-slate-600">đồng hành cá nhân hóa</div>
+            </div>
+            <div class="rounded-2xl bg-white/70 glass border border-white/70 p-4 shadow-soft">
+              <div class="text-xl font-semibold text-slate-900">Thực hành</div>
+              <div class="text-xs text-slate-600">ngắn – rõ – làm được</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <div class="relative rounded-[28px] bg-white/70 glass border border-white/70 p-6 shadow-soft">
+            <div class="absolute -top-3 -right-3 h-20 w-20 rounded-3xl bg-emerald-950/90 blur-0"></div>
+            <div class="relative">
+              <div class="flex items-center gap-4">
+                <div class="h-14 w-14 rounded-2xl bg-emerald-950 text-emerald-50 grid place-items-center font-serif text-2xl shadow-soft">
+                  ♥
+                </div>
+                <div>
+                  <div class="font-semibold text-slate-900">Bài test cảm xúc 60 giây</div>
+                  <div class="text-sm text-slate-600">Để biết bạn đang “kẹt” ở đâu</div>
+                </div>
+              </div>
+
+              <div class="mt-5 space-y-3 text-sm">
+                <div class="rounded-2xl bg-white/70 border border-white/70 p-4">
+                  <div class="font-medium text-slate-900">Bạn thường thấy điều gì nhất?</div>
+                  <div class="mt-2 flex flex-wrap gap-2">
+                    <span class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-900 border border-emerald-100">Lo âu</span>
+                    <span class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-900 border border-emerald-100">Tức giận</span>
+                    <span class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-900 border border-emerald-100">Trống rỗng</span>
+                    <span class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-900 border border-emerald-100">Mất ngủ</span>
+                  </div>
+                </div>
+
+                <div class="rounded-2xl bg-white/70 border border-white/70 p-4">
+                  <div class="font-medium text-slate-900">Nếu có 1 điều muốn thay đổi ngay:</div>
+                  <div class="mt-2 flex flex-wrap gap-2">
+                    <span class="px-3 py-1 rounded-full bg-slate-50 text-slate-700 border border-slate-200">Bình tĩnh hơn</span>
+                    <span class="px-3 py-1 rounded-full bg-slate-50 text-slate-700 border border-slate-200">Giao tiếp tốt</span>
+                    <span class="px-3 py-1 rounded-full bg-slate-50 text-slate-700 border border-slate-200">Có động lực</span>
+                  </div>
+                </div>
+
+                <a href="#contact" class="mt-2 inline-flex w-full items-center justify-center rounded-2xl bg-emerald-950 px-5 py-3 text-emerald-50 hover:bg-emerald-900 transition">
+                  Nhận bản đồ “đi từ gốc” cho bạn
+                </a>
+
+                <p class="text-xs text-slate-500 text-center">
+                  Gợi ý cá nhân hóa dựa trên tình trạng hiện tại của bạn.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 text-center text-xs text-slate-600">
+            Kéo xuống để xem <a class="underline hover:text-emerald-900" href="#path">lộ trình 4 bước</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Path -->
+  <section id="path" class="py-14 md:py-18 bg-white">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="reveal max-w-2xl">
+        <h2 class="font-serif text-3xl md:text-4xl font-bold text-slate-900">Lộ trình 4 bước: rõ ràng – có thực hành</h2>
+        <p class="mt-3 text-slate-600 leading-relaxed">
+          Chữa lành không phải “nghe hiểu” là xong. Bạn cần một tiến trình vừa đủ sâu, vừa đủ dễ để duy trì.
+        </p>
+      </div>
+
+      <div class="mt-8 grid md:grid-cols-4 gap-4">
+        <div class="reveal rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-soft">
+          <div class="text-xs font-semibold text-emerald-900">BƯỚC 1</div>
+          <div class="mt-2 font-semibold text-slate-900">Nhận diện gốc kẹt</div>
+          <div class="mt-2 text-sm text-slate-600">Đặt tên cảm xúc, nhận ra vòng lặp, thấy “điểm kích hoạt”.</div>
+        </div>
+        <div class="reveal rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-soft">
+          <div class="text-xs font-semibold text-emerald-900">BƯỚC 2</div>
+          <div class="mt-2 font-semibold text-slate-900">Giải phóng bám chấp</div>
+          <div class="mt-2 text-sm text-slate-600">Thực hành buông: kỳ vọng – kiểm soát – so sánh.</div>
+        </div>
+        <div class="reveal rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-soft">
+          <div class="text-xs font-semibold text-emerald-900">BƯỚC 3</div>
+          <div class="mt-2 font-semibold text-slate-900">Xây nội lực</div>
+          <div class="mt-2 text-sm text-slate-600">Tạo thói quen nhỏ, ổn định thần kinh, nâng năng lượng.</div>
+        </div>
+        <div class="reveal rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-soft">
+          <div class="text-xs font-semibold text-emerald-900">BƯỚC 4</div>
+          <div class="mt-2 font-semibold text-slate-900">Hòa hợp gia đình</div>
+          <div class="mt-2 text-sm text-slate-600">Giao tiếp bình tĩnh, ranh giới rõ ràng, ấm lại kết nối.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Programs -->
+  <section id="programs" class="py-14 md:py-18 bg-slate-50">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="reveal max-w-2xl">
+        <h2 class="font-serif text-3xl md:text-4xl font-bold text-slate-900">Chương trình phù hợp từng nhu cầu</h2>
+        <p class="mt-3 text-slate-600 leading-relaxed">
+          Chọn hướng đi đúng giúp bạn tiết kiệm thời gian và tránh “làm sai cách”.
+        </p>
+      </div>
+
+      <div class="mt-8 grid md:grid-cols-3 gap-5">
+        <div class="reveal rounded-[28px] bg-white border border-slate-200 p-6 shadow-soft hover:-translate-y-1 transition">
+          <div class="flex items-center justify-between">
+            <div class="font-semibold text-slate-900">Reset Cảm Xúc (7 ngày)</div>
+            <span class="text-xs rounded-full bg-emerald-50 text-emerald-900 border border-emerald-100 px-3 py-1">Nhanh</span>
+          </div>
+          <p class="mt-3 text-sm text-slate-600">Ổn định lại tâm trạng, ngủ tốt hơn, dừng vòng lặp overthinking.</p>
+          <ul class="mt-4 text-sm text-slate-700 space-y-2">
+            <li>• Bài tập 10 phút/ngày</li>
+            <li>• Checklist theo dõi tiến triển</li>
+            <li>• 01 buổi định hướng</li>
+          </ul>
+          <a href="#contact" class="mt-6 inline-flex w-full items-center justify-center rounded-2xl bg-slate-900 px-5 py-3 text-white hover:bg-slate-800 transition">
+            Nhận tư vấn chương trình
+          </a>
+        </div>
+
+        <div class="reveal rounded-[28px] bg-white border border-emerald-200 p-6 shadow-soft hover:-translate-y-1 transition">
+          <div class="flex items-center justify-between">
+            <div class="font-semibold text-slate-900">Đồng Hành 1:1 (21–30 ngày)</div>
+            <span class="text-xs rounded-full bg-gold-400/20 text-gold-600 border border-gold-400/30 px-3 py-1">Khuyến nghị</span>
+          </div>
+          <p class="mt-3 text-sm text-slate-600">Cá nhân hóa theo tình trạng của bạn, đi từ gốc, bền vững.</p>
+          <ul class="mt-4 text-sm text-slate-700 space-y-2">
+            <li>• 4–6 buổi 1:1</li>
+            <li>• Bài tập + phản hồi theo tuần</li>
+            <li>• Kịch bản xử lý “điểm kích hoạt”</li>
+          </ul>
+          <a href="#contact" class="mt-6 inline-flex w-full items-center justify-center rounded-2xl bg-emerald-950 px-5 py-3 text-emerald-50 hover:bg-emerald-900 transition">
+            Đặt lịch tư vấn
+          </a>
+        </div>
+
+        <div class="reveal rounded-[28px] bg-white border border-slate-200 p-6 shadow-soft hover:-translate-y-1 transition">
+          <div class="flex items-center justify-between">
+            <div class="font-semibold text-slate-900">Hòa Hợp Gia Đình (4 tuần)</div>
+            <span class="text-xs rounded-full bg-slate-50 text-slate-700 border border-slate-200 px-3 py-1">Sâu</span>
+          </div>
+          <p class="mt-3 text-sm text-slate-600">Gỡ nút thắt giao tiếp, giảm xung đột, tăng kết nối ấm áp.</p>
+          <ul class="mt-4 text-sm text-slate-700 space-y-2">
+            <li>• Bộ công cụ giao tiếp bình tĩnh</li>
+            <li>• Ranh giới & kỳ vọng rõ ràng</li>
+            <li>• Thực hành tình huống đời thật</li>
+          </ul>
+          <a href="#contact" class="mt-6 inline-flex w-full items-center justify-center rounded-2xl bg-slate-900 px-5 py-3 text-white hover:bg-slate-800 transition">
+            Xem lộ trình chi tiết
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proof -->
+  <section id="proof" class="py-14 md:py-18 bg-white">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="reveal max-w-2xl">
+        <h2 class="font-serif text-3xl md:text-4xl font-bold text-slate-900">Kết quả thường thấy (thực tế, không tô hồng)</h2>
+        <p class="mt-3 text-slate-600 leading-relaxed">
+          Bạn không cần “hoàn hảo”. Bạn cần ổn định và tiến bộ đều.
+        </p>
+      </div>
+
+      <div class="mt-8 grid md:grid-cols-3 gap-5">
+        <div class="reveal rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-soft">
+          <div class="text-sm font-semibold text-slate-900">Ngủ tốt – nhẹ đầu hơn</div>
+          <p class="mt-2 text-sm text-slate-600">Giảm overthinking, bớt căng ngực/khó thở do stress.</p>
+        </div>
+        <div class="reveal rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-soft">
+          <div class="text-sm font-semibold text-slate-900">Giao tiếp bình tĩnh</div>
+          <p class="mt-2 text-sm text-slate-600">Ít bùng nổ cảm xúc, biết nói điều mình cần một cách ấm áp.</p>
+        </div>
+        <div class="reveal rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-soft">
+          <div class="text-sm font-semibold text-slate-900">Có nhịp sống mới</div>
+          <p class="mt-2 text-sm text-slate-600">Giữ thói quen nhỏ, tăng năng lượng, thấy rõ đường đi của mình.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-14 md:py-18 bg-slate-50">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="reveal max-w-2xl">
+        <h2 class="font-serif text-3xl md:text-4xl font-bold text-slate-900">Câu hỏi thường gặp</h2>
+        <p class="mt-3 text-slate-600 leading-relaxed">Rõ ràng ngay từ đầu để bạn an tâm chọn đúng.</p>
+      </div>
+
+      <div class="mt-8 grid md:grid-cols-2 gap-4">
+        <details class="reveal group rounded-3xl bg-white border border-slate-200 p-6 shadow-soft">
+          <summary class="cursor-pointer font-semibold text-slate-900 flex items-center justify-between">
+            Tôi bận, có theo được không?
+            <span class="text-slate-500 group-open:rotate-180 transition">⌄</span>
+          </summary>
+          <p class="mt-3 text-sm text-slate-600">
+            Có. Lộ trình thiết kế theo nguyên tắc “thực hành ngắn – đều”. Nhiều bài tập chỉ 10–15 phút/ngày.
+          </p>
+        </details>
+
+        <details class="reveal group rounded-3xl bg-white border border-slate-200 p-6 shadow-soft">
+          <summary class="cursor-pointer font-semibold text-slate-900 flex items-center justify-between">
+            Có phải trị liệu tâm lý không?
+            <span class="text-slate-500 group-open:rotate-180 transition">⌄</span>
+          </summary>
+          <p class="mt-3 text-sm text-slate-600">
+            Đây là đồng hành thực hành chữa lành và xây nội lực. Nếu bạn có dấu hiệu nguy cơ cao (tự hại, trầm cảm nặng),
+            bạn nên gặp chuyên gia y tế/chuyên gia tâm lý lâm sàng.
+          </p>
+        </details>
+
+        <details class="reveal group rounded-3xl bg-white border border-slate-200 p-6 shadow-soft">
+          <summary class="cursor-pointer font-semibold text-slate-900 flex items-center justify-between">
+            Tôi nên bắt đầu từ chương trình nào?
+            <span class="text-slate-500 group-open:rotate-180 transition">⌄</span>
+          </summary>
+          <p class="mt-3 text-sm text-slate-600">
+            Nếu bạn đang quá tải cảm xúc: bắt đầu Reset 7 ngày. Nếu muốn đi từ gốc và bền: Đồng hành 1:1.
+          </p>
+        </details>
+
+        <details class="reveal group rounded-3xl bg-white border border-slate-200 p-6 shadow-soft">
+          <summary class="cursor-pointer font-semibold text-slate-900 flex items-center justify-between">
+            Tôi cần chuẩn bị gì trước khi tư vấn?
+            <span class="text-slate-500 group-open:rotate-180 transition">⌄</span>
+          </summary>
+          <p class="mt-3 text-sm text-slate-600">
+            Chỉ cần mô tả ngắn: bạn đang gặp gì, mong muốn điều gì, và bạn có thể dành bao nhiêu thời gian mỗi ngày.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-14 md:py-18 bg-white">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="grid md:grid-cols-2 gap-8 items-start">
+        <div class="reveal">
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-slate-900">Đặt lịch tư vấn</h2>
+          <p class="mt-3 text-slate-600 leading-relaxed">
+            Bạn mô tả ngắn tình trạng hiện tại. Tôi sẽ gợi ý lộ trình phù hợp nhất (ngắn gọn, rõ ràng).
+          </p>
+
+          <div class="mt-6 rounded-3xl bg-slate-50 border border-slate-200 p-6 shadow-soft">
+            <div class="text-sm font-semibold text-slate-900">Liên hệ nhanh</div>
+            <div class="mt-3 text-sm text-slate-700 space-y-2">
+              <p>• Zalo/Điện thoại: <span class="font-medium">[điền số của bạn]</span></p>
+              <p>• Email: <span class="font-medium">[điền email]</span></p>
+              <p>• Facebook: <span class="font-medium">[điền link]</span></p>
+            </div>
+            <p class="mt-4 text-xs text-slate-500">
+              Gợi ý: bạn nên pin link trang này trên Facebook/Zalo để tăng lượt xem và chuyển đổi.
+            </p>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <form class="rounded-[28px] border border-slate-200 bg-slate-50 p-6 shadow-soft" onsubmit="return false;">
+            <div class="grid gap-4">
+              <div>
+                <label class="text-sm font-medium text-slate-900">Tên của bạn</label>
+                <input class="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-emerald-200"
+                  placeholder="Ví dụ: Linh" />
+              </div>
+              <div>
+                <label class="text-sm font-medium text-slate-900">Số điện thoại / Zalo</label>
+                <input class="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-emerald-200"
+                  placeholder="Nhập số liên hệ" />
+              </div>
+              <div>
+                <label class="text-sm font-medium text-slate-900">Bạn đang gặp điều gì?</label>
+                <textarea rows="5"
+                  class="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-emerald-200"
+                  placeholder="Mô tả ngắn: cảm xúc, gia đình, công việc, giấc ngủ..."></textarea>
+              </div>
+
+              <button class="rounded-2xl bg-emerald-950 px-6 py-3 text-emerald-50 hover:bg-emerald-900 transition shadow-soft">
+                Gửi yêu cầu (bạn sẽ tự thay bằng form thật)
+              </button>
+
+              <p class="text-xs text-slate-500">
+                Lưu ý: Đây là form giao diện. Nếu bạn muốn form gửi thật, tôi sẽ tích hợp Google Form / Formspree / Sheet.
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <footer class="mt-12 border-t border-slate-200 pt-6 text-sm text-slate-600 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+        <p>© <span id="year"></span> Bình An Nội Tâm. All rights reserved.</p>
+        <a href="#home" class="hover:text-emerald-900 underline">Lên đầu trang</a>
+      </footer>
+    </div>
+  </section>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu
+    const btn = document.getElementById('menuBtn');
+    const mm = document.getElementById('mobileMenu');
+    btn?.addEventListener('click', () => mm.classList.toggle('hidden'));
+
+    // Reveal on scroll
+    const els = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
+    }, { threshold: 0.12 });
+    els.forEach(el => io.observe(el));
+
+    // Close mobile menu after click
+    document.querySelectorAll('#mobileMenu a').forEach(a => {
+      a.addEventListener('click', () => mm.classList.add('hidden'));
+    });
+  </script>
+</body>
+</html>
